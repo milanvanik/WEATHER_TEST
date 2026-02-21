@@ -18,6 +18,20 @@ class ApiRequests {
     return "${baseUrl}forecast?q=$city&appid=$apiKey&units=metric";
   }
 
+  static String currentConditionUrlByLocation({
+    required double lat,
+    required double lon,
+  }) {
+    return "${baseUrl}weather?lat=$lat&lon=$lon&appid=$apiKey&units=metric";
+  }
+
+  static String fiveDaysForecastUrlByLocation({
+    required double lat,
+    required double lon,
+  }) {
+    return "${baseUrl}forecast?lat=$lat&lon=$lon&appid=$apiKey&units=metric";
+  }
+
   static String airPollutionUrl({
     required double lat,
     required double lon,

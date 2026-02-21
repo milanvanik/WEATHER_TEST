@@ -3,11 +3,23 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myweatherapp/presentation/home_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+
+  final prefs = await SharedPreferences.getInstance();
+  final String? lastCity = prefs.getString('last_city');
+
+  // Time based theme loading (7 AM to 7 PM is light, otherwise dark)
+  final int currentHour = DateTime.now().hour;
+  if (currentHour >= 7 && currentHour < 19) {
+    themeNotifier.value = ThemeMode.light;
+  } else {
+    themeNotifier.value = ThemeMode.dark;
+  }
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
@@ -22,11 +34,12 @@ void main() async {
     ),
   );
 
-  runApp(const MyApp());
+  runApp(MyApp(initialCity: lastCity));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? initialCity;
+  const MyApp({super.key, this.initialCity});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +71,7 @@ class MyApp extends StatelessWidget {
               ),
               iconTheme: const IconThemeData(color: Colors.white),
             ),
-            home: const HomeScreen(),
+            home: HomeScreen(initialCity: initialCity),
           ),
         );
       },
