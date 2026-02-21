@@ -5,12 +5,15 @@ A beautiful and responsive Flutter weather application that provides real-time w
 ## Features ✨
 
 - **Real-time Weather Data**: Current temperature, wind speed, humidity, and more.
+- **Auto-Detect Location**: Instantly fetches precise weather for your exact GPS coordinates upon launch using `geolocator`.
 - **5-Day / 3-Hour Forecast**: Detailed forecast scrollable by hour and day.
 - **Interactive Data Cards**: Swipe vertically to switch between **Temperature**, **Wind Speed**, and **Humidity**.
-- **Dynamic Header System**: Context-aware header that updates to show the specific Day (e.g., "Temperature [Tue]") as you scroll through the forecast.
-- **Dynamic Animations**: Beautiful Lottie animations that change based on weather conditions (Sunny, Cloudy, Rainy, Thunder, Windy).
-- **Responsive Design**: Built with `flutter_screenutil` to look great on all device sizes.
-- **Custom UI**: Glassmorphism effects and custom fonts (MadimiOne, Oxanium).
+- **Dynamic Animations**: Beautiful Lottie animations that change based on weather conditions.
+- **Offline & Error Resilience**: Gorgeous custom error screens with retry mechanisms and Lottie graphics for unhandled exceptions or connection drops.
+- **Smart Data Caching**: Remembers your last searched city across app restarts using `shared_preferences`.
+- **Pull-to-Refresh**: Easily reload data with smart 5-minute cooldown locks to prevent API spam.
+- **Intelligent Theming**: Automatically switches between Light and Dark mode depending on the active time of day.
+- **Custom UI**: Glassmorphism/neumorphism effects and custom fonts (MadimiOne, Oxanium).
 
 ## Design Workflow 🎨
 
@@ -22,8 +25,7 @@ This project followed a structured design-to-development process:
 
 <p align="center">
   <img src="assets/screenshots/home_screen_light.jpeg" alt="Home Screen (Light)" width="200" />
-  <img src="assets/screenshots/home_screen_dark.jpeg" alt="Home Screen (Dark)" width="200" />
-  <img src="assets/screenshots/details_screen_light.jpeg" alt="Details Screen (Light)" width="200" />
+  <img src="assets/screenshots/error_screen.jpeg" alt="Error Screen (Dark)" width="200" />
   <img src="assets/screenshots/details_screen_dark.jpeg" alt="Details Screen (Dark)" width="200" />
 </p>
 
@@ -31,8 +33,8 @@ This project followed a structured design-to-development process:
 
 - **Framework**: Flutter
 - **Language**: Dart
-- **State Management**: `setState` (Simple & Effective)
-- **Networking**: `http`
+- **State Management**: `setState` & `WidgetsBindingObserver` (Native Lifecycle)
+- **Networking/Data**: `http`, `shared_preferences`, `geolocator`
 - **Animations**: `lottie`
 - **Responsiveness**: `flutter_screenutil`
 - **Icons**: `flutter_svg`, `cupertino_icons`
