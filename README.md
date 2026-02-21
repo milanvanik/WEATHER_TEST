@@ -21,7 +21,11 @@ This project followed a structured design-to-development process:
 ## Screenshots 📸
 
 <p align="center">
-  <img src="assets/screenshots/preview.png" alt="preview" />
+  <img src="assets/screenshots/home_screen_light.jpeg" alt="Home Screen (Light)" width="200" />
+  <img src="assets/screenshots/home_screen_dark.jpeg" alt="Home Screen (Dark)" width="200" />
+  <br />
+  <img src="assets/screenshots/details_screen_light.jpeg" alt="Details Screen (Light)" width="200" />
+  <img src="assets/screenshots/details_screen_dark.jpeg" alt="Details Screen (Dark)" width="200" />
 </p>
 
 ## Tech Stack 🛠️
