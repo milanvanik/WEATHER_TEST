@@ -84,7 +84,6 @@ flutter:
     - assets/gif/lottie_wind_speed.json
     - assets/svgs/glass.svg
     - assets/svgs/swipe_menu.svg
-    - assets/screenshots/preview.png
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
