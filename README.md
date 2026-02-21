@@ -24,6 +24,7 @@ This project followed a structured design-to-development process:
 ## Screenshots 📸
 
 <p align="center">
+  <img src="assets/screenshots/location_permission.png" alt="Location Permission (Dark)" width="200" />
   <img src="assets/screenshots/home_screen_light.jpeg" alt="Home Screen (Light)" width="200" />
   <img src="assets/screenshots/details_screen_dark.jpeg" alt="Details Screen (Dark)" width="200" />
   <img src="assets/screenshots/error_screen.png" alt="Error Screen (Light)" width="200" />
