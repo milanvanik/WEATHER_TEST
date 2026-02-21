@@ -38,7 +38,7 @@ class HourlyForecastCard extends StatelessWidget {
                 fontFamily: "MadimiOne",
                 fontWeight: FontWeight.w300,
                 fontSize: 18.sp,
-                color: const Color(0XFF3C4042),
+                color: Theme.of(context).textTheme.bodyMedium?.color,
               ),
             ),
           ),
@@ -51,7 +51,11 @@ class HourlyForecastCard extends StatelessWidget {
               fontFamily: "MadimiOne",
               fontWeight: FontWeight.w300,
               fontSize: 14.sp,
-              color: const Color(0XFF3C4042).withValues(alpha: 0.5),
+              color: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.color
+                  ?.withValues(alpha: 0.5),
             ),
           ),
         ],

@@ -17,4 +17,11 @@ class ApiRequests {
   }) {
     return "${baseUrl}forecast?q=$city&appid=$apiKey&units=metric";
   }
+
+  static String airPollutionUrl({
+    required double lat,
+    required double lon,
+  }) {
+    return "${baseUrl}air_pollution?lat=$lat&lon=$lon&appid=$apiKey";
+  }
 }

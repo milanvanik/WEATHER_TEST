@@ -13,6 +13,8 @@ import 'package:myweatherapp/widgets/get_lottie.dart';
 import 'package:myweatherapp/widgets/homescreen_data_card.dart';
 import 'package:myweatherapp/widgets/main_weather_data.dart';
 import 'package:http/http.dart' as http;
+import 'package:myweatherapp/main.dart';
+import 'package:myweatherapp/presentation/detailed_data_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   WeatherMainModel? weatherDataType;
   TempMainModel? tempDataType;
   FiveDaysMainForecastModel? fiveDaysForecast;
+  Map<String, dynamic>? rawCurrentData;
 
   String cityName = "Delhi";
   bool isLoading = false;
@@ -50,6 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
           json.decode(currentResponse.body);
       final Map<String, dynamic> forecastData =
           json.decode(forecastResponse.body);
+
+      rawCurrentData = currentData;
 
       final weatherList = currentData['weather'] as List<dynamic>;
       final mainWeather = weatherList.isNotEmpty ? weatherList[0] : {};
@@ -88,9 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
         weatherDataType == null ||
         tempDataType == null ||
         fiveDaysForecast == null) {
-      return const Scaffold(
-        backgroundColor: Color(0XFFE7EAEF),
-        body: Center(
+      return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -98,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Color(0XFFE7EAEF),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,32 +114,60 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 60),
-                    child: Center(
-                      child: Text(
-                        overflow: TextOverflow.ellipsis,
-                        cityName,
-                        style: GoogleFonts.oxanium(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0XFF3C4042),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Text(
+                          overflow: TextOverflow.ellipsis,
+                          cityName,
+                          style: GoogleFonts.oxanium(
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.color
+                                ?.withValues(alpha: 0.8),
+                          ),
                         ),
-                      ),
+                        Positioned(
+                          right: 20,
+                          child: Switch(
+                            value: themeNotifier.value == ThemeMode.dark,
+                            onChanged: (value) {
+                              themeNotifier.value =
+                                  value ? ThemeMode.dark : ThemeMode.light;
+                            },
+                            activeColor: Colors.white,
+                            activeTrackColor: Colors.white24,
+                            inactiveThumbColor: Colors.white,
+                            inactiveTrackColor: Colors.black26,
+                            trackOutlineColor:
+                                WidgetStateProperty.all(Colors.transparent),
+                            thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                                (Set<WidgetState> states) {
+                              return const Icon(Icons.circle,
+                                  color: Colors.transparent);
+                            }),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: 56,
+              height: 48.h,
             ),
             Lottie.asset(
               getLottieAsset(weatherDataType!.main),
-              width: 410.w,
-              height: 410.h,
+              width: 390.w,
+              height: 390.h,
               fit: BoxFit.cover,
             ),
             SizedBox(
-              height: 64,
+              height: 48.h,
             ),
             MainWeatherData(
               weatherType: weatherDataType!.main,
@@ -162,10 +195,64 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     width: 10.w,
                   ),
-                  SvgPicture.asset("assets/svgs/swipe_menu.svg"),
+                  GestureDetector(
+                    onTap: () async {
+                      if (rawCurrentData == null) return;
+
+                      // Fetch AQI data
+                      final lat = rawCurrentData!['coord']?['lat'];
+                      final lon = rawCurrentData!['coord']?['lon'];
+                      Map<String, dynamic>? aqiMap;
+
+                      if (lat != null && lon != null) {
+                        try {
+                          final aqiResponse = await http.get(Uri.parse(
+                              ApiRequests.airPollutionUrl(
+                                  lat: lat.toDouble(), lon: lon.toDouble())));
+                          if (aqiResponse.statusCode == 200) {
+                            aqiMap = json.decode(aqiResponse.body);
+                          }
+                        } catch (e) {
+                          // Ignore error, aqiMap remains null
+                        }
+                      }
+
+                      if (!context.mounted) return;
+
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  DetailedDataScreen(
+                            currentData: rawCurrentData!,
+                            cityName: cityName,
+                            mainWeather: weatherDataType?.description ??
+                                weatherDataType!.main,
+                            animatedIcon: getLottieAsset(weatherDataType!.main),
+                            aqiData: aqiMap,
+                          ),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(1.0, 0.0);
+                            const end = Offset.zero;
+                            const curve = Curves.easeInOut;
+                            var tween = Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: curve));
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: SvgPicture.asset("assets/svgs/swipe_menu.svg"),
+                  ),
                 ],
               ),
             ),
+            SizedBox(height: 10.h), // Added bottom padding to lift the bar up
           ],
         ),
       ),

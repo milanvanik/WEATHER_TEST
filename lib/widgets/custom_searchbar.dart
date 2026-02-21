@@ -8,25 +8,33 @@ class CustomSearchbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Offset distance = Offset(2, 2);
-    double blur = 4;
+    Offset distance = const Offset(4, 4);
+    double blur = 8;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: 328.w,
       height: 54.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-              blurRadius: blur,
-              offset: distance,
-              color: Colors.black.withValues(alpha: 0.80),
-              inset: true),
+            blurRadius: blur,
+            offset: distance,
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.4)
+                : const Color(0xFFA6ABB2).withValues(alpha: 0.5),
+            inset: true,
+          ),
           BoxShadow(
-              blurRadius: blur,
-              offset: -distance,
-              color: Colors.white,
-              inset: true),
+            blurRadius: blur,
+            offset: -distance,
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.05)
+                : Colors.white.withValues(alpha: 0.8),
+            inset: true,
+          ),
         ],
       ),
       child: Center(
@@ -35,6 +43,7 @@ class CustomSearchbar extends StatelessWidget {
             fontFamily: "MadimiOne",
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,
+            color: Theme.of(context).textTheme.bodyMedium?.color,
           ),
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.only(left: 16),

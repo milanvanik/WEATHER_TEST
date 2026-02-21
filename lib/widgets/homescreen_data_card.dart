@@ -141,7 +141,7 @@ class _DataPageState extends State<_DataPage> {
                 fontFamily: "MadimiOne",
                 fontWeight: FontWeight.w300,
                 fontSize: 16.sp,
-                color: const Color(0XFF3C4042),
+                color: Theme.of(context).textTheme.bodyMedium?.color,
               ),
             ),
           ),

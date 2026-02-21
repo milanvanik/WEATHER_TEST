@@ -16,7 +16,11 @@ class MainWeatherData extends StatelessWidget {
           fontFamily: "MadimiOne",
           fontSize: 24.sp,
           fontWeight: FontWeight.normal,
-          color: const Color(0XFF3C4042),
+          color: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.color
+              ?.withValues(alpha: 0.8),
         ),
         children: [
           TextSpan(
@@ -25,7 +29,11 @@ class MainWeatherData extends StatelessWidget {
               fontFamily: "MadimiOne",
               fontWeight: FontWeight.w300,
               fontSize: 32.sp,
-              color: const Color(0XFF3C4042),
+              color: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.color
+                  ?.withValues(alpha: 0.9),
             ),
           ),
         ],
