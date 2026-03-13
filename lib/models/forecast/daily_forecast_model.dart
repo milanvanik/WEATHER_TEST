@@ -1,4 +1,4 @@
-import 'package:myweatherapp/models/forecast/forecast_temp_model.dart';
+import 'package:skycast/models/forecast/forecast_temp_model.dart';
 
 class DailyForecast {
   final ForecastTempModel temperature;

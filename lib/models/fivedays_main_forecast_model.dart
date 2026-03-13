@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:myweatherapp/models/forecast_maindata_model.dart';
+import 'package:skycast/models/forecast_maindata_model.dart';
 
 FiveDaysMainForecastModel fiveDaysMainForecastModelFromJson(String str) =>
     FiveDaysMainForecastModel.fromJson(json.decode(str));

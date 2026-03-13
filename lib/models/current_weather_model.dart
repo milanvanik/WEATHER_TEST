@@ -1,4 +1,4 @@
-import 'package:myweatherapp/models/temperature_model.dart';
+import 'package:skycast/models/temperature_model.dart';
 
 class CurrentWeatherModel {
   final DateTime localObservationDateTime;

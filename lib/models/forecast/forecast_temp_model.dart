@@ -1,4 +1,4 @@
-import 'package:myweatherapp/models/forecast/temp_values_model.dart';
+import 'package:skycast/models/forecast/temp_values_model.dart';
 
 class ForecastTempModel {
   final TempValuesModel minimum;

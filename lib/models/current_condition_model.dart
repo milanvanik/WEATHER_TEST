@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:myweatherapp/models/country_code_model.dart';
-import 'package:myweatherapp/models/temp_main_model.dart';
-import 'package:myweatherapp/models/weather_main_model.dart';
-import 'package:myweatherapp/models/wind_model.dart';
+import 'package:skycast/models/country_code_model.dart';
+import 'package:skycast/models/temp_main_model.dart';
+import 'package:skycast/models/weather_main_model.dart';
+import 'package:skycast/models/wind_model.dart';
 
 CurrentConditionModel currentConditionModelFromJson(String str) =>
     CurrentConditionModel.fromJson(json.decode(str));

@@ -1,4 +1,4 @@
-package com.example.myweatherapp
+package com.example.skycast
 
 
 import android.os.Build

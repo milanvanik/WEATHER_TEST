@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:myweatherapp/models/forecast/daily_forecast_model.dart';
+import 'package:skycast/models/forecast/daily_forecast_model.dart';
 
 ForecastModel forecastModelFromJson(String str) =>
     ForecastModel.fromJson(json.decode(str));

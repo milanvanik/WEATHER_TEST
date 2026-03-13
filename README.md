@@ -1,4 +1,4 @@
-# MyWeatherApp 🌤️
+# SkyCast 🌤️
 
 A beautiful and responsive Flutter weather application that provides real-time weather updates and 5-day forecasts. The app features dynamic animated backgrounds using Lottie based on the current weather conditions.
 
@@ -67,7 +67,7 @@ Follow these steps to set up the project locally.
 
     ```bash
     git clone https://github.com/milanrnw/WEATHER_TEST.git
-    cd myweatherapp
+    cd skycast
     ```
 
 2.  **Install dependencies**:

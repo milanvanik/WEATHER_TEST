@@ -1,6 +1,6 @@
-import 'package:myweatherapp/models/forecast_temp_model.dart';
-import 'package:myweatherapp/models/weather_main_model.dart';
-import 'package:myweatherapp/models/wind_model.dart';
+import 'package:skycast/models/forecast_temp_model.dart';
+import 'package:skycast/models/weather_main_model.dart';
+import 'package:skycast/models/wind_model.dart';
 
 class ForecastMaindataModel {
   final ForecastTempModel main;

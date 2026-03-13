@@ -3,7 +3,7 @@ import 'package:flutter_inset_shadow/flutter_inset_shadow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:myweatherapp/widgets/custom_searchbar.dart';
+import 'package:skycast/widgets/custom_searchbar.dart';
 
 class ErrorView extends StatelessWidget {
   final String errorMessage;

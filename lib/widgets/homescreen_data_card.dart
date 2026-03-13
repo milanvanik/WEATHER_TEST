@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:myweatherapp/models/fivedays_main_forecast_model.dart';
-import 'package:myweatherapp/widgets/get_lottie.dart';
-import 'package:myweatherapp/widgets/hourly_forecast_card.dart';
+import 'package:skycast/models/fivedays_main_forecast_model.dart';
+import 'package:skycast/widgets/get_lottie.dart';
+import 'package:skycast/widgets/hourly_forecast_card.dart';
 import 'package:intl/intl.dart';
 
 class HomescreenDataCard extends StatelessWidget {
